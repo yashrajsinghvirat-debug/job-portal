@@ -55,6 +55,20 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Root health endpoint - Handle HEAD and GET requests to "/"
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Job Portal Backend is running',
+    version: '1.0.0',
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.head('/', (req, res) => {
+  res.status(200).end();
+});
+
 // Handle 404 errors - Must be registered AFTER all routes
 app.use(notFound);
 
